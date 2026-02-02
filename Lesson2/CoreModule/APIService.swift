@@ -8,18 +8,18 @@
 import Foundation
 
 
-protocol APIServiceProtocol {
+public protocol APIServiceProtocol {
     func fetchEntries(category: String, limit: Int, skip: Int) async throws -> [ApiEntry]
 }
 
 
-enum APIError: Error {
+public enum APIError: Error {
     case invalidURL
     case invalidResponse
     case decodingError(Error)
 }
 
-final class APIService: APIServiceProtocol {
+public final class APIService: APIServiceProtocol {
     
     static let shared = APIService()
     

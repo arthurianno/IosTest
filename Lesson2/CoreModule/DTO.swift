@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct ApiResponse: Decodable {
+public struct ApiResponse: Decodable {
     let products: [ApiEntry] 
 }
 
-struct ApiEntry: Decodable, Identifiable, Hashable {
+public struct ApiEntry: Decodable, Identifiable, Hashable {
     let id: Int
     let title: String
     let description: String

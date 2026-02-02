@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Endpoints {
+public enum Endpoints {
     static let baseURL = "https://dummyjson.com"
     
     
