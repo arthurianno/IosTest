@@ -1,11 +1,12 @@
 //
-//  Cart.swift
+//  CartView.swift
 //  Lesson2
 //
-//  Created by Артур Шитиков on 22.01.26.
+//  Created by Артур Шитиков on 15.01.26.
 //
 
-import Foundation
+import SwiftUI
+import CoreServices
 import SwiftUI
 
 struct CartView: View {
@@ -19,21 +20,36 @@ struct CartView: View {
                 .bold()
                 .padding()
             
-            if dataStore.cartItems.isEmpty {
+            if dataStore.cartItem.isEmpty {
                 Spacer()
                 Text("В корзине пусто 🛒")
                     .foregroundColor(.gray)
                 Spacer()
             } else {
-                List() {
-                    ForEach(dataStore.cartItems) { item in
+                List {
+                    ForEach(Array(dataStore.cartItem.enumerated()), id: \.element.id) { index, item in
                         HStack {
                             Text(item.product.title)
                             Spacer()
                             Text("\(Int(item.product.price)) $")
                         }
                     }
-                    .onDelete{dataStore.cartItems.remove(atOffsets: $0)}
+                    .onDelete { indexSet in
+                        indexSet.forEach { index in
+                            dataStore.removeFromCart(at: index)
+                        }
+                    }
+                    
+                    // Итоговая сумма
+                    HStack {
+                        Text("Итого:")
+                            .font(.headline)
+                        Spacer()
+                        Text("\(Int(dataStore.getCartTotal())) $")
+                            .font(.headline)
+                            .foregroundColor(.green)
+                    }
+                    .padding(.vertical, 8)
                 }
             
             }

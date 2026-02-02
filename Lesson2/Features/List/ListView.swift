@@ -2,10 +2,11 @@
 //  ListView.swift
 //  Lesson2
 //
-//  Created by Артур Шитиков on 22.01.26.
+//  Created by Артур Шитиков on 15.01.26.
 //
 
-import Foundation
+import SwiftUI
+import CoreServices
 import SwiftUI
 
 struct ListView: View {

@@ -1,17 +1,16 @@
 //
 //  Endpoints.swift
-//  Lesson2
+//  CoreServices
 //
-//  Created by Артур Шитиков on 22.01.26.
+//  Created by Артур Шитиков on 28.01.26.
 //
 
 import Foundation
 
 public enum Endpoints {
-    static let baseURL = "https://dummyjson.com"
+    public static let baseURL = "https://dummyjson.com"
     
-    
-    static func products(category: String, limit: Int, skip: Int) -> URL? {
+    public static func products(category: String, limit: Int, skip: Int) -> URL? {
         // Если категория "all", грузим всё, иначе фильтруем
         let path = category == "all" ? "/products" : "/products/category/\(category)"
         

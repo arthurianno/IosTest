@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 internal import Combine
+import CoreServices
 
 
 @MainActor
@@ -15,9 +16,16 @@ final class DataStore: ObservableObject {
     
     @Published var entries: [ApiEntry] = []
     @Published var selectedEntry: ApiEntry?
-    @Published var cartItems: [CartItem] = []
+    @Published var cartItem: [CartItem] = []
     
     private var searchTask: Task<Void, Never>?
+    
+    // Сервисы через протоколы
+    @Inject private var apiService: APIServiceProtocol
+    @Inject private var cartService: CartServiceProtocol
+    @Inject private var categoryService: CategoryServiceProtocol
+    @Inject private var productService: ProductServiceProtocol
+
     
     // Рубрики
     @Published var currentCategory: String = "all" {
@@ -34,7 +42,8 @@ final class DataStore: ObservableObject {
     private var canLoadMore = true
     @Published var isLoading = false
     
-    private let service = APIService.shared
+    
+  
     
     func resetAndLoad() {
         
@@ -55,7 +64,7 @@ final class DataStore: ObservableObject {
                 
                 if Task.isCancelled { return }
                 
-                let newEntries = try await service.fetchEntries(category: currentCategory, limit: limit, skip: skip)
+                let newEntries = try await apiService.fetchEntries(category: currentCategory, limit: limit, skip: skip)
                 
                 if Task.isCancelled { return }
                 
@@ -94,7 +103,7 @@ final class DataStore: ObservableObject {
             do {
                 if Task.isCancelled { return }
                 
-                let newEntries = try await service.fetchEntries(category: currentCategory, limit: limit, skip: skip)
+                let newEntries = try await apiService.fetchEntries(category: currentCategory, limit: limit, skip: skip)
                 
                 if Task.isCancelled { return }
                 
@@ -117,6 +126,33 @@ final class DataStore: ObservableObject {
             }
         }
     }
+    
+    // MARK: - Cart Management через сервис
+    
+    func addToCart(_ entry: ApiEntry) {
+        cartService.addToCart(entry)
+        cartItem = cartService.getCartItems()
+    }
+    
+    func removeFromCart(at index: Int) {
+        cartService.removeFromCart(at: index)
+        cartItem = cartService.getCartItems()
+    }
+    
+    func clearCart() {
+        cartService.clearCart()
+        cartItem = []
+    }
+    
+    func getCartTotal() -> Double {
+        return cartService.getCartTotal()
+    }
+    
+    // MARK: - Category Management через сервис
+    
+    func getAllCategories() -> [String] {
+        return categoryService.getAllCategories()
+    }
 }
 
 // Обертка для товара в корзине, чтобы ID всегда был уникальным
@@ -124,3 +160,4 @@ struct CartItem: Identifiable {
     let id = UUID()
     let product: ApiEntry
 }
+

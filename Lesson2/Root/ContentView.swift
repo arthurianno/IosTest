@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreServices
 
 struct ContentView: View {
     @StateObject private var coordinator = AppCoordinator()
@@ -53,8 +54,8 @@ struct ContentView: View {
                                 .font(.title2)
                             
                             // Счетчик товаров
-                            if !dataStore.cartItems.isEmpty {
-                                Text("\(dataStore.cartItems.count)")
+                            if !dataStore.cartItem.isEmpty {
+                                Text("\(dataStore.cartItem.count)")
                                     .font(.caption2)
                                     .bold()
                                     .foregroundColor(.white)
@@ -101,9 +102,8 @@ struct ContentView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
                 isAnimating = false
                 
-               
-                let cartItem = CartItem(product: item)
-                dataStore.cartItems.append(cartItem)
+                // Используем метод сервиса для добавления в корзину
+                dataStore.addToCart(item)
                 
             }
         }

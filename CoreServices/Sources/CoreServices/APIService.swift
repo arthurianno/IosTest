@@ -1,17 +1,15 @@
 //
 //  APIService.swift
-//  Lesson2
+//  CoreServices
 //
-//  Created by Артур Шитиков on 22.01.26.
+//  Created by Артур Шитиков on 28.01.26.
 //
 
 import Foundation
 
-
-public protocol APIServiceProtocol {
+public protocol APIServiceProtocol: Sendable {
     func fetchEntries(category: String, limit: Int, skip: Int) async throws -> [ApiEntry]
 }
-
 
 public enum APIError: Error {
     case invalidURL
@@ -19,13 +17,13 @@ public enum APIError: Error {
     case decodingError(Error)
 }
 
-public final class APIService: APIServiceProtocol {
+public final class APIService: APIServiceProtocol, @unchecked Sendable {
     
-    static let shared = APIService()
+    public static let shared = APIService()
     
     private init() {}
     
-    func fetchEntries(category: String, limit: Int, skip: Int) async throws -> [ApiEntry] {
+    public func fetchEntries(category: String, limit: Int, skip: Int) async throws -> [ApiEntry] {
         
         // Формируем URL с параметрами
         guard let url = Endpoints.products(category: category, limit: limit, skip: skip) else {

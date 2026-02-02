@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct Product: Identifiable, Hashable {
+    let id: Int
+    let title: String
+    let description: String
+    let category: String
+    let price: Double
+}

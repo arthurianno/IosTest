@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		30CORESERV3F2A502000F5E003 /* CoreServices in Frameworks */ = {isa = PBXBuildFile; productRef = 30CORESERV2F2A502000F5E002 /* CoreServices */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		3011A9132F18C08300F59713 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30CORESERV3F2A502000F5E003 /* CoreServices in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 				3011A9072F18C08200F59713 /* Lesson2 */,
 				3011A9152F18C08300F59713 /* Lesson2Tests */,
 				3011A91F2F18C08300F59713 /* Lesson2UITests */,
+				30FCBF772F2A502000F5EBA7 /* Frameworks */,
 				3011A9062F18C08200F59713 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +96,13 @@
 				3011A91C2F18C08300F59713 /* Lesson2UITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		30FCBF772F2A502000F5EBA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +125,7 @@
 			);
 			name = Lesson2;
 			packageProductDependencies = (
+				30CORESERV2F2A502000F5E002 /* CoreServices */,
 			);
 			productName = Lesson2;
 			productReference = 3011A9052F18C08200F59713 /* Lesson2.app */;
@@ -195,6 +209,9 @@
 			);
 			mainGroup = 3011A8FC2F18C08200F59713;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				30CORESERV1F2A502000F5E001 /* XCLocalSwiftPackageReference "CoreServices" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3011A9062F18C08200F59713 /* Products */;
 			projectDirPath = "";
@@ -578,6 +595,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		30CORESERV1F2A502000F5E001 /* XCLocalSwiftPackageReference "CoreServices" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = CoreServices;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		30CORESERV2F2A502000F5E002 /* CoreServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 30CORESERV1F2A502000F5E001 /* XCLocalSwiftPackageReference "CoreServices" */;
+			productName = CoreServices;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3011A8FD2F18C08200F59713 /* Project object */;
 }
